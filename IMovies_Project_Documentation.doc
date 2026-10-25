@@ -1,0 +1,460 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office'
+      xmlns:w='urn:schemas-microsoft-com:office:word'
+      xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+<meta charset="utf-8">
+<title>IMovies - Full Stack MERN Project Documentation</title>
+<!--[if gte mso 9]>
+<xml>
+ <w:WordDocument>
+  <w:View>Print</w:View>
+  <w:Zoom>100</w:Zoom>
+  <w:DoNotOptimizeForBrowser/>
+ </w:WordDocument>
+</xml>
+<![endif]-->
+<style>
+  body {
+    font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
+    font-size: 11pt;
+    line-height: 1.6;
+    color: #1a1a1a;
+    margin: 1in;
+  }
+  h1 {
+    font-size: 24pt;
+    color: #6d28d9;
+    border-bottom: 2pt solid #7c3aed;
+    padding-bottom: 6pt;
+    margin-top: 18pt;
+    margin-bottom: 12pt;
+  }
+  h2 {
+    font-size: 16pt;
+    color: #5b21b6;
+    border-bottom: 1pt solid #ddd6fe;
+    padding-bottom: 4pt;
+    margin-top: 16pt;
+    margin-bottom: 8pt;
+  }
+  h3 {
+    font-size: 13pt;
+    color: #7c3aed;
+    margin-top: 12pt;
+    margin-bottom: 6pt;
+  }
+  p, li {
+    font-size: 11pt;
+    color: #2e2e2e;
+  }
+  ul, ol {
+    margin-top: 4pt;
+    margin-bottom: 10pt;
+    padding-left: 24pt;
+  }
+  li {
+    margin-bottom: 4pt;
+  }
+  code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 10pt;
+    background-color: #f3f0fb;
+    color: #6d28d9;
+    padding: 2pt 4pt;
+    border-radius: 3pt;
+  }
+  pre {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 9.5pt;
+    background-color: #f8f7fc;
+    border: 1pt solid #e8e4f3;
+    padding: 10pt;
+    border-radius: 4pt;
+    line-height: 1.4;
+    overflow-x: auto;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 10pt;
+    margin-bottom: 14pt;
+    font-size: 10.5pt;
+  }
+  th, td {
+    border: 1pt solid #ddd6fe;
+    padding: 6pt 10pt;
+    text-align: left;
+  }
+  th {
+    background-color: #ede9fe;
+    color: #4c1d95;
+    font-weight: bold;
+  }
+  tr:nth-child(even) {
+    background-color: #faf5ff;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2pt 6pt;
+    font-size: 9pt;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #7c3aed;
+    border-radius: 4pt;
+  }
+  .doc-header {
+    text-align: center;
+    padding: 24pt 0 16pt 0;
+    margin-bottom: 24pt;
+    border-bottom: 3pt double #7c3aed;
+  }
+  .doc-title {
+    font-size: 26pt;
+    font-weight: bold;
+    color: #5b21b6;
+    margin-bottom: 4pt;
+  }
+  .doc-subtitle {
+    font-size: 14pt;
+    color: #6d28d9;
+    margin-bottom: 8pt;
+  }
+  .doc-meta {
+    font-size: 10pt;
+    color: #6b7280;
+  }
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <div class="doc-title">Full Stack Development with MERN</div>
+  <div class="doc-subtitle">Project Documentation: IMovies — Movie Ticket Booking System</div>
+  <div class="doc-meta">Course Project Documentation | Technology Stack: MongoDB, Express.js, React.js, Node.js</div>
+</div>
+
+<h2>1. Introduction</h2>
+<ul>
+  <li><strong>Project Title:</strong> IMovies — Movie Ticket Booking Made Simple</li>
+  <li><strong>Domain:</strong> Full Stack Web Engineering / Online Entertainment &amp; Ticketing</li>
+  <li><strong>Technology Stack:</strong> MERN (MongoDB, Express.js, React.js 19, Node.js)</li>
+  <li><strong>Team Members:</strong>
+    <ul>
+      <li><strong>Lead Developer:</strong> Full Stack MERN Developer</li>
+      <li><strong>Roles &amp; Responsibilities:</strong> System Architecture, Frontend UI/UX Engineering, Backend REST API Development, MongoDB Database Modeling, Atomic Concurrency Control, and Quality Assurance.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2>2. Project Overview</h2>
+<h3>2.1 Purpose</h3>
+<p><strong>IMovies</strong> is a modern, responsive web application engineered to streamline the cinema discovery and ticket booking experience. Built from the ground up using the MERN stack, it eliminates conventional reservation bottlenecks through an interactive seating matrix, time-sensitive availability tracking, dynamic price calculation, and real-time double-booking prevention.</p>
+
+<h3>2.2 Key Features &amp; Capabilities</h3>
+<ul>
+  <li><strong>Comprehensive Movie Showcase:</strong> Real-time listing of 8 curated blockbuster titles featuring high-resolution poster art, genres, durations, age ratings, synopsis, and director/cast listings.</li>
+  <li><strong>Instant Title Search &amp; Multi-Attribute Filtering:</strong> Dynamic search input combined with genre and language dropdown selectors.</li>
+  <li><strong>Cinema Theatres &amp; Showtime Scheduling:</strong> Multi-cinema listings spanning Bangalore, Chennai, and Hyderabad across various dates.</li>
+  <li><strong>Real-Time Showtime Expiration Logic:</strong> Automatically compares showtime hours against the current system time; marks elapsed shows as <code>Expired / Booking Closed</code> to prevent invalid bookings.</li>
+  <li><strong>Interactive Seating Layout:</strong> Visually displays theater screen orientation and individual seats across multiple rows, dynamically highlighting <em>Available</em>, <em>Selected</em>, and <em>Booked</em> states.</li>
+  <li><strong>Atomic Double-Booking Prevention:</strong> Utilizes MongoDB atomic operators (<code>$addToSet</code> with <code>$not $elemMatch</code>) to guarantee zero overlapping seat reservations during concurrent checkout attempts.</li>
+  <li><strong>JWT Authentication &amp; Password Encryption:</strong> Stateless JSON Web Token authentication with 12-round bcrypt password hashing.</li>
+  <li><strong>Booking Summary &amp; Confirmation:</strong> Generates unique booking reference IDs (e.g., <code>IMOV-JURX6PW9</code>) and a complete itemized ticket breakdown.</li>
+  <li><strong>User Reservation History &amp; Instant Cancellation:</strong> Users can view all previous bookings and cancel reservations, immediately returning seats to the available pool.</li>
+  <li><strong>Modern Purple &amp; White Design:</strong> Accessible, high-contrast user interface styled in royal purple (<code>#7c3aed</code>), clean lavender surfaces, and crisp white cards.</li>
+</ul>
+
+<h2>3. Architecture</h2>
+
+<h3>3.1 Frontend Architecture (React.js)</h3>
+<p>The client is structured as a Single Page Application (SPA) leveraging modern React 19 and Vite:</p>
+<ul>
+  <li><strong>Vite Build Tool:</strong> Powers instant Hot Module Replacement (HMR) and optimized minified client bundles.</li>
+  <li><strong>Declarative Routing:</strong> <code>react-router-dom</code> (v7) governs client navigation with protected route guards (<code>&lt;PrivateRoute&gt;</code>) restricting unauthenticated access.</li>
+  <li><strong>State Management:</strong> Centralized React <code>Context API</code> (<code>AuthContext</code>) manages authentication tokens, user sessions, and login/logout lifecycles. Component-level state governs real-time seat matrices and search inputs.</li>
+  <li><strong>HTTP Communication:</strong> An Axios client layer with an interceptor automatically attaches the <code>Authorization: Bearer &lt;token&gt;</code> header to protected requests.</li>
+  <li><strong>Toast Notifications:</strong> <code>react-hot-toast</code> provides non-blocking notifications for booking events, validation errors, and session status.</li>
+</ul>
+
+<h3>3.2 Backend Architecture (Node.js &amp; Express.js)</h3>
+<p>The backend follows the Model-View-Controller (MVC) architectural pattern:</p>
+<ul>
+  <li><strong>Express REST API:</strong> Modular routers handle distinct resource domains (<code>/api/auth</code>, <code>/api/movies</code>, <code>/api/theatres</code>, <code>/api/shows</code>, <code>/api/bookings</code>).</li>
+  <li><strong>Middleware Pipeline:</strong> Includes CORS headers, JSON request body parsing, JWT token authentication, and centralized error handling.</li>
+  <li><strong>Atomic Seat Reservation Strategy:</strong> The booking controller executes atomic updates via <code>Show.findOneAndUpdate(...)</code> to prevent race conditions without external distributed locks.</li>
+</ul>
+
+<h3>3.3 Database Architecture (MongoDB &amp; Mongoose)</h3>
+<p>MongoDB models define schema constraints, indices, and relationships:</p>
+<ul>
+  <li><strong>User:</strong> Stores customer credentials (name, unique email, bcrypt-hashed password with <code>select: false</code>, role).</li>
+  <li><strong>Movie:</strong> Stores movie metadata (title, synopsis, genres, languages, duration, rating, poster URL, cast, director).</li>
+  <li><strong>Theatre:</strong> Defines cinema venue details (name, location, city, row count, seats per row, total capacity).</li>
+  <li><strong>Show:</strong> Maps movies to specific theatres, dates, showtimes, base ticket prices, and an active array of <code>bookedSeats</code>.</li>
+  <li><strong>Booking:</strong> Permanent transaction ledger recording unique reference code, customer ID, show reference, reserved seat numbers, total price, and status.</li>
+</ul>
+
+<h2>4. Setup Instructions</h2>
+
+<h3>4.1 Prerequisites</h3>
+<ul>
+  <li><strong>Node.js:</strong> v18.0.0 or higher</li>
+  <li><strong>npm:</strong> v9.0.0 or higher</li>
+  <li><strong>MongoDB:</strong> Community Server v6.0 or v9.0 running locally on port 27017</li>
+  <li><strong>Web Browser:</strong> Google Chrome, Mozilla Firefox, or Microsoft Edge</li>
+</ul>
+
+<h3>4.2 Step-by-Step Installation</h3>
+<ol>
+  <li><strong>Open Project Directory:</strong>
+    <pre>cd IMovies</pre>
+  </li>
+  <li><strong>Install Backend Dependencies:</strong>
+    <pre>cd backend
+npm install</pre>
+  </li>
+  <li><strong>Configure Backend Environment (<code>backend/.env</code>):</strong>
+    <pre>PORT=5000
+MONGO_URI=mongodb://localhost:27017/imovies
+JWT_SECRET=imovies_dev_secret_key_2024_change_in_prod
+JWT_EXPIRE=7d
+NODE_ENV=development</pre>
+  </li>
+  <li><strong>Install Frontend Dependencies:</strong>
+    <pre>cd ../frontend
+npm install</pre>
+  </li>
+  <li><strong>Seed Sample Data (8 Movies, 4 Theatres, 325 Shows):</strong>
+    <pre>cd ../backend
+node seed/seedDB.js</pre>
+  </li>
+</ol>
+
+<h2>5. Folder Structure</h2>
+<pre>
+IMovies/
+├── backend/                       # Node.js Express REST API
+│   ├── config/db.js              # Database connection logic
+│   ├── controllers/              # Resource business logic
+│   │   ├── authController.js     # Auth &amp; registration
+│   │   ├── movieController.js    # Movie queries &amp; filter lists
+│   │   ├── theatreController.js  # Theatre information
+│   │   ├── showController.js     # Showtime logic &amp; expiration detection
+│   │   └── bookingController.js  # Atomic bookings &amp; cancellations
+│   ├── middleware/               # Auth guards &amp; global error handlers
+│   ├── models/                   # Mongoose schemas (User, Movie, Theatre, Show, Booking)
+│   ├── routes/                   # Express endpoint routers
+│   ├── seed/seedDB.js            # 14-day database seeder script
+│   ├── .env                      # Secret environment configuration
+│   └── server.js                 # Express server root
+│
+├── frontend/                      # React SPA (Vite)
+│   ├── src/
+│   │   ├── api/index.js          # Centralized Axios API client
+│   │   ├── components/           # Navbar, Footer, MovieCard, PrivateRoute
+│   │   ├── context/              # AuthContext (JWT session state)
+│   │   ├── pages/                # Home, Movies, Detail, Seats, Confirm, History, Auth
+│   │   ├── App.jsx               # Route tree &amp; toast configuration
+│   │   └── index.css             # Purple &amp; White custom design system
+│   ├── vite.config.js            # Dev proxy config (/api -> http://localhost:5000)
+│   └── index.html                # HTML5 entry
+│
+├── start.bat                     # Windows 1-click startup automation
+├── reseed.bat                    # Windows 1-click database refresh
+├── README.md                     # Quickstart documentation
+└── PROJECT_DOCUMENTATION.md      # Full Markdown reference
+</pre>
+
+<h2>6. Running the Application</h2>
+<h3>6.1 One-Click Launch (Recommended for Windows)</h3>
+<p>Simply double-click the <code>start.bat</code> file located in the root project directory. It initializes MongoDB, the Express backend, and the React frontend in separate consoles.</p>
+
+<h3>6.2 Manual Console Startup</h3>
+<table>
+  <tr>
+    <th>Service</th>
+    <th>Command</th>
+    <th>Port / URL</th>
+  </tr>
+  <tr>
+    <td><strong>MongoDB</strong></td>
+    <td><code>&amp; "C:\Program Files\MongoDB\Server\9.0\bin\mongod.exe" --dbpath C:\data\db</code></td>
+    <td><code>localhost:27017</code></td>
+  </tr>
+  <tr>
+    <td><strong>Backend API</strong></td>
+    <td><code>cd backend &amp;&amp; npm run dev</code></td>
+    <td><code>http://localhost:5000</code></td>
+  </tr>
+  <tr>
+    <td><strong>Frontend Client</strong></td>
+    <td><code>cd frontend &amp;&amp; npm run dev</code></td>
+    <td><code>http://localhost:5173</code></td>
+  </tr>
+</table>
+
+<h2>7. API Documentation</h2>
+
+<h3>7.1 Authentication Endpoints</h3>
+<table>
+  <tr>
+    <th>Endpoint</th>
+    <th>Method</th>
+    <th>Access</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><code>/api/auth/register</code></td>
+    <td>POST</td>
+    <td>Public</td>
+    <td>Creates new user account; returns JWT token and user profile.</td>
+  </tr>
+  <tr>
+    <td><code>/api/auth/login</code></td>
+    <td>POST</td>
+    <td>Public</td>
+    <td>Validates credentials; returns JWT token on success.</td>
+  </tr>
+  <tr>
+    <td><code>/api/auth/me</code></td>
+    <td>GET</td>
+    <td>Private</td>
+    <td>Returns authenticated user profile using Bearer token.</td>
+  </tr>
+</table>
+
+<h3>7.2 Movie Endpoints</h3>
+<table>
+  <tr>
+    <th>Endpoint</th>
+    <th>Method</th>
+    <th>Access</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><code>/api/movies</code></td>
+    <td>GET</td>
+    <td>Public</td>
+    <td>Lists all movies with pagination (<code>?page=1&amp;limit=12</code>) and search filters.</td>
+  </tr>
+  <tr>
+    <td><code>/api/movies/filters</code></td>
+    <td>GET</td>
+    <td>Public</td>
+    <td>Returns distinct genre and language lists for filter dropdowns.</td>
+  </tr>
+  <tr>
+    <td><code>/api/movies/:id</code></td>
+    <td>GET</td>
+    <td>Public</td>
+    <td>Returns complete details of a single movie by ID.</td>
+  </tr>
+</table>
+
+<h3>7.3 Showtime Endpoints</h3>
+<table>
+  <tr>
+    <th>Endpoint</th>
+    <th>Method</th>
+    <th>Access</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><code>/api/shows/movie/:movieId</code></td>
+    <td>GET</td>
+    <td>Public</td>
+    <td>Returns upcoming shows for a movie with real-time expiration flags.</td>
+  </tr>
+  <tr>
+    <td><code>/api/shows/:showId</code></td>
+    <td>GET</td>
+    <td>Public</td>
+    <td>Returns specific show details and current booked seat list.</td>
+  </tr>
+</table>
+
+<h3>7.4 Booking Endpoints</h3>
+<table>
+  <tr>
+    <th>Endpoint</th>
+    <th>Method</th>
+    <th>Access</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><code>/api/bookings</code></td>
+    <td>POST</td>
+    <td>Private</td>
+    <td>Atomically reserves seats and generates confirmed booking reference.</td>
+  </tr>
+  <tr>
+    <td><code>/api/bookings/my</code></td>
+    <td>GET</td>
+    <td>Private</td>
+    <td>Returns all past and active bookings for the logged-in user.</td>
+  </tr>
+  <tr>
+    <td><code>/api/bookings/:id/cancel</code></td>
+    <td>PUT</td>
+    <td>Private</td>
+    <td>Cancels booking and releases seats back to the show.</td>
+  </tr>
+</table>
+
+<h2>8. Authentication &amp; Authorization</h2>
+<p>Authentication is handled through industry-standard cryptographic techniques:</p>
+<ul>
+  <li><strong>JWT Tokens:</strong> Generated upon login/register with a 7-day expiration time using HMAC SHA-256 signatures.</li>
+  <li><strong>Password Hashing:</strong> Passwords undergo salted one-way hashing using <code>bcryptjs</code> with 12 rounds of salt generation before storage.</li>
+  <li><strong>Protected Routes:</strong> Handled on the frontend via <code>&lt;PrivateRoute&gt;</code> and on the backend via Express <code>protect</code> middleware checking the HTTP <code>Authorization: Bearer &lt;token&gt;</code> header.</li>
+</ul>
+
+<h2>9. User Interface Design</h2>
+<p>The user interface has been styled with an elegant <strong>Purple and White</strong> design system:</p>
+<ul>
+  <li><strong>Color Palette:</strong> Royal Purple (<code>#7c3aed</code>), Crisp White (<code>#ffffff</code>), Soft Lavender Surfaces (<code>#f3f0fb</code>), and Midnight Violet Typography (<code>#18132b</code>).</li>
+  <li><strong>Key Screens:</strong>
+    <ol>
+      <li><strong>Home Page:</strong> Hero banner, call-to-action buttons, key benefit cards, and now-showing movie grid.</li>
+      <li><strong>Movie Catalog:</strong> Title search bar, dynamic genre/language dropdowns, and responsive movie cards.</li>
+      <li><strong>Movie Details:</strong> High-resolution backdrop, movie metadata, and showtime cards with real-time <code>Available</code> and <code>Expired</code> badges.</li>
+      <li><strong>Interactive Seat Map:</strong> Curved theater screen indicator, responsive seat buttons with color-coded states, and dynamic live subtotal.</li>
+      <li><strong>Confirmation &amp; History:</strong> Ticket summary with unique alphanumeric booking references and an instant cancellation feature.</li>
+    </ol>
+  </li>
+</ul>
+
+<h2>10. Testing</h2>
+<ul>
+  <li><strong>API Endpoint Testing:</strong> Verified all REST routes using automated HTTP scripts. Ensured status codes <code>200</code>, <code>201</code>, <code>400</code>, <code>401</code>, and <code>409</code> are returned appropriately.</li>
+  <li><strong>Double-Booking Race Condition Test:</strong> Dispatched duplicate simultaneous requests for identical seats; confirmed that the second request is consistently rejected with <code>409 Conflict</code>.</li>
+  <li><strong>Showtime Expiration Validation:</strong> Verified that showtimes preceding the current clock time are marked as expired and cannot be reserved.</li>
+  <li><strong>Cancellation Verification:</strong> Confirmed that cancelling a reservation restores the seats to available status.</li>
+  <li><strong>Frontend Build Validation:</strong> Built production artifacts via Vite (<code>npm run build</code>) with zero errors across all 97 modules.</li>
+</ul>
+
+<h2>11. Screenshots or Demo</h2>
+<ul>
+  <li><strong>Live Local URL:</strong> <code>http://localhost:5173</code></li>
+  <li><strong>Test User:</strong> <code>demo2@imovies.dev</code> / <code>demo1234</code></li>
+  <li><em>Note: Capture application screenshots directly from your browser at <code>http://localhost:5173</code> to embed in this section.</em></li>
+</ul>
+
+<h2>12. Known Issues &amp; Limitations</h2>
+<ul>
+  <li><strong>Demo Payment:</strong> Payment processing simulates successful checkout for demonstration purposes without real financial gateway integrations.</li>
+  <li><strong>External Poster CDN:</strong> Movie posters are fetched from TMDb's CDN; an active internet connection is required for images to load.</li>
+  <li><strong>Token Storage:</strong> JWT tokens are stored in browser <code>localStorage</code>; production implementations can switch to <code>httpOnly</code> cookies for enhanced security.</li>
+</ul>
+
+<h2>13. Future Enhancements</h2>
+<ul>
+  <li><strong>Live Payment Gateway:</strong> Integration with Razorpay, Stripe, or PayPal for real financial transactions.</li>
+  <li><strong>Digital QR Code Tickets:</strong> Generate scannable QR codes for booking confirmation passes.</li>
+  <li><strong>Admin Management Portal:</strong> Dedicated management interface to upload new titles, manage halls, and set dynamic show prices.</li>
+  <li><strong>Automated Notifications:</strong> Delivery of ticket receipts and calendar reminders via SMS, Email (SendGrid), or WhatsApp API.</li>
+  <li><strong>Snacks &amp; Concessions:</strong> Add-on selection of food and beverages during the seat selection flow.</li>
+</ul>
+
+</body>
+</html>

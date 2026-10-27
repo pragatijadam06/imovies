@@ -225,4 +225,48 @@ const seedDB = async () => {
   }
 };
 
-seedDB();
+// Automatically seed sample data if connected database is empty
+const autoSeedIfEmpty = async () => {
+  try {
+    const movieCount = await Movie.countDocuments({});
+    if (movieCount === 0) {
+      console.log('🌱 Database is empty. Auto-seeding initial sample movies, theatres, and shows...');
+      const createdMovies = await Movie.insertMany(movies);
+      const createdTheatres = await Theatre.insertMany(theatres);
+
+      const showsToCreate = [];
+      const dates = getDatesFromToday(14);
+
+      for (const movie of createdMovies) {
+        for (const theatre of createdTheatres) {
+          for (const date of dates.slice(0, 7)) {
+            const numShowtimes = Math.floor(Math.random() * 2) + 2;
+            const shuffledTimes = [...showTimes].sort(() => 0.5 - Math.random()).slice(0, numShowtimes);
+            for (const time of shuffledTimes) {
+              const price = prices[Math.floor(Math.random() * prices.length)];
+              showsToCreate.push({
+                movie: movie._id,
+                theatre: theatre._id,
+                date,
+                time,
+                price,
+                bookedSeats: [],
+              });
+            }
+          }
+        }
+      }
+
+      await Show.insertMany(showsToCreate);
+      console.log(`✅ Auto-seeded ${createdMovies.length} movies, ${createdTheatres.length} theatres, and ${showsToCreate.length} shows!`);
+    }
+  } catch (error) {
+    console.error('⚠️ Auto-seed check error:', error.message);
+  }
+};
+
+if (require.main === module) {
+  seedDB();
+}
+
+module.exports = { autoSeedIfEmpty, seedDB };

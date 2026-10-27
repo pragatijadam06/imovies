@@ -5,6 +5,7 @@ const morgan = require('morgan');
 
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/errorHandler');
+const { autoSeedIfEmpty } = require('./seed/seedDB');
 
 // Route imports
 const authRoutes = require('./routes/authRoutes');
@@ -13,13 +14,18 @@ const theatreRoutes = require('./routes/theatreRoutes');
 const showRoutes = require('./routes/showRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
 
-// Connect to database
-connectDB();
+// Connect to database & auto-seed if empty
+connectDB().then(() => {
+  autoSeedIfEmpty();
+});
 
 const app = express();
 
 // Middleware
-app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:5173', credentials: true }));
+app.use(cors({
+  origin: process.env.FRONTEND_URL ? [process.env.FRONTEND_URL, 'http://localhost:5173'] : '*',
+  credentials: true,
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 if (process.env.NODE_ENV === 'development') {
